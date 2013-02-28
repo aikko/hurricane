@@ -1,0 +1,3 @@
+Description:
+  The hurricane:setup generator help you to initialize your project config. That
+  includes the Gemfile generation, kaminari style generation, and ui-component library copy.
