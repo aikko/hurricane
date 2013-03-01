@@ -1,0 +1,12 @@
+zh:
+  hurricane:
+    common_ui:
+      delete_all:
+        choose_record_first: "请选择您要删除的记录！"
+    views:
+      pagination:
+        first: "&laquo; 首页"
+        last: "尾页 &raquo;"
+        previous: "&lsaquo; 上页"
+        next: "下页 &rsaquo;"
+        truncate: "..."

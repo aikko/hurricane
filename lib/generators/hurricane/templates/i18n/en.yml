@@ -1,0 +1,12 @@
+en:
+  hurricane:
+    views:
+      common_ui:
+        delete_all:
+            choose_record_first: "Please choose your record to delete before your operation!"
+      pagination:
+        first: "&laquo; First"
+        last: "Last &raquo;"
+        previous: "&lsaquo; Prev."
+        next: "Next &rsaquo;"
+        truncate: "..."

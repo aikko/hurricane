@@ -1,0 +1,3 @@
+rm hurricane-*
+gem build hurricane.gemspec
+gem install hurricane
