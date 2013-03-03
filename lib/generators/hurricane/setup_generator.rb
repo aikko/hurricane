@@ -1,10 +1,8 @@
 module Hurricane
   module Generators
-    class SetupGenerator < Rails::Generators::Base
+    class InitGenerator < Rails::Generators::Base
       source_root File.expand_path("../templates",__FILE__)
      
-      desc "setup Gemfile, initialize essential files and configs for your application"
-
       def config_gem_file
         append_to_file 'Gemfile', '# imported by hurricane BEGIN' 
         gem "bootstrap-sass",:version => "~> 2.2.2.0", :group => :asset
@@ -28,6 +26,9 @@ module Hurricane
         copy_file "i18n/en.yml", "config/locales/hurricane.en.yml"
         copy_file "i18n/zh.yml", "config/locales/hurricane.zh.yml"
       end
+
+      def copy_templates
+        directory 'rails/haml', 'lib/templates/'
     end
   end
 end

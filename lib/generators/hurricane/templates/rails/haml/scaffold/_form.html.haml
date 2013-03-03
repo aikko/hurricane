@@ -1,0 +1,19 @@
+= form_for @<%= singular_table_name %>,:html => {:class => "form-horizontal"} do |f|
+  - if @<%= singular_table_name %>.errors.any?
+    #error
+      %h2= "请修正以下#{pluralize(@<%=singular_table_name%>.errors.count,"error")}个错误后再重试:"
+      %ul
+      - @<%= singular_table_name %>.errors.full_messages.each do |msg|
+        %li = msg
+  
+<% for attr in attributes -%>
+  .control-group
+    = f.label :<%= attr.name%>,"<%= attr.name%>", :class => "control-label"
+    .controls
+      = f.<%= attr.field_type %> :<%= attr.name %>, :placeholder => "请输入"<%= ',:rows => "5",:class => "span6"' if attr.field_type == :text_area%>
+<% end -%>
+  .control-group
+    .controls
+      %button{:type => "submit", :class => "btn-primary"} 提交
+      &nbsp;&nbsp;
+      = link_to "返回", :<%=plural_name%>
