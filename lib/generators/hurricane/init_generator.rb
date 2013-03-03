@@ -28,7 +28,8 @@ module Hurricane
       end
 
       def copy_templates
-        directory 'rails/haml', 'lib/templates/'
+        directory 'rails/', 'lib/templates/'
+      end
     end
   end
 end

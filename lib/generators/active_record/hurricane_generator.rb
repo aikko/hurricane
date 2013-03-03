@@ -2,9 +2,11 @@ require 'rails/generators/active_record'
 require 'generators/hurricane/orm_helpers'
 
 module ActiveRecord
-  module Generator
+  module Generators
     class HurricaneGenerator < ActiveRecord::Generators::Base
       argument :attributes, :type => :array, :default => [],  :banner => "field:type field:type"
+
+      namespace 'hurricane'
 
       include Hurricane:Generators::OrmHelpers
       source_root File.expand_path("../templates",__FILE__)
