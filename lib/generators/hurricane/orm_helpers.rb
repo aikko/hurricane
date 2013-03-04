@@ -1,4 +1,4 @@
-module Devise
+module Hurricane
   module Generators
     module OrmHelpers
       def model_contents
@@ -7,8 +7,8 @@ module Devise
   has_and_belongs_to_many :roles, :join_table => '#{table_name}_roles'
 CONTENT
       end
-      def model_exists?
-        File.exists?(File.join(destination_root, model_path))
+      def model_exists?(model)
+        File.exists?(File.join(destination_root, model_path(model)))
       end
                                                 
       def migration_exists?(table_name)
@@ -19,8 +19,8 @@ CONTENT
         @migration_path ||= File.join("db", "migrate")
       end
 
-      def model_path
-        @model_path ||= File.join("app", "models", "#{file_path}.rb")
+      def model_path(model)
+        File.join("app", "models","#{model}.rb")
       end
     end
   end

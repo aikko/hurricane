@@ -6,29 +6,38 @@ module ActiveRecord
     class HurricaneGenerator < ActiveRecord::Generators::Base
       argument :attributes, :type => :array, :default => [],  :banner => "field:type field:type"
 
-      namespace 'hurricane'
-
-      include Hurricane:Generators::OrmHelpers
+      include Hurricane::Generators::OrmHelpers
       source_root File.expand_path("../templates",__FILE__)
 
       def copy_migration
-        # copy from devise
-        migration_template "migration.rb", "db/migrate/devise_create_#{table_name}"
+         # copy from devise
+         migration_template "migration.rb", "db/migrate/hurricane_create_#{table_name}"
       end
 
       def generate_model
-        invoke "active_record:model", [name], :migration => false unless model_exists? && behavior == :invoke
+        invoke "active_record:model",[name],:migration => false unless model_exists?(singular_name) && behavior == :invoke
         generate "model", "Role name:string key:string desc:text"
       end
 
 
       def inject_content
-        content = model_contents + <<CONTENT
+        content = ''
+        # accept user defined attributes
+        if attributes.any?
+          content += '  attr_accessor'
+          attributes.each_with_index do |attr,i| 
+              content += " :#{attr.name}"
+              content += ',' if i < attributes.size - 1
+          end
+        end
+        content +=  model_contents + <<CONTENT
+
   # this fields are essential to autherization
   attr_accessor :email, :mobile 
+
 CONTENT
-        inject_into_class(model_path,class_path, add_indent(content) if model_exists? 
-        inject_into_class(model_path,"Role","  has_and_belongs_to_many :users, :join_table => '#{table_name}_roles'") if model_exists?
+        inject_into_class(model_path(singular_name),get_class_path.last, add_indent(content)) if model_exists?(singular_name) 
+        inject_into_class(model_path("role"),"Role", "  has_and_belongs_to_many :users, :join_table => '#{table_name}_roles'\n") if model_exists?("role") 
       end
 
       def model_data
@@ -40,7 +49,7 @@ RUBY
       end
 
       def create_indexes
-<<RUBY
+<<SCRIPTS
     # index
     add_index :#{table_name}, :email
     add_index :#{table_name}, :mobile
@@ -53,19 +62,21 @@ RUBY
     end
 
     add_index :#{table_name}_roles, :#{singular_name}_id, :role_id
-RUBY
+SCRIPTS
+      end
 
       private
-      def class_path
+      def get_class_path
         if namespaced?
-          class_name.to_s.split("::").last
+          class_name.to_s.split("::")
         else
-          class_name
+          [class_name]
+        end
       end
 
       def add_indent(content)
-        indent = class_path.size - 1
-        content.split("\n").map { |line| "  " * indent} .join("\n")
+        indent = get_class_path.size - 1
+        content.split("\n").map { |line| "  " * indent + line} .join("\n")
       end
     end
   end
