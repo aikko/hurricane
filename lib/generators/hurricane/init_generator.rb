@@ -13,7 +13,7 @@ module Hurricane
         append_to_file "Gemfile", "\n# imported by hurricane END"
       end
 
-      def install
+      def install_gems
         inside Rails.root do
           run "bundle install"
         end
