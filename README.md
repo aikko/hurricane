@@ -1,6 +1,10 @@
 Hurricane
 =========
+# Quick Start
+begin with this command:
+rails new appname -m https://raw.github.com/jgnan1981/hurricane/master/project_template.rb  --skip-bundle
 
+# Introduction to Hurricane
 Hurricane is a study project for myself. After I learned Rails 3.2 I want to build up a helper for me to make myself building manager website much faster. With set of view helpers, generators, and page structures.
 
 This project is just a glue-up project, I join bootstrap, haml, cancan, kaminari together, which I think is helpful for improving my working efficiency. I'm not going to provide the user model in this project as it'll for my employer. I'll create another one, so if we try to use this project we need to create our user model by your own. I think this will be reasonable for most existing project so the can enjoy their own model without any limitation.
