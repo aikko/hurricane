@@ -12,6 +12,12 @@ module Hurricane
         gem "cancan"
         append_to_file "Gemfile", "\n# imported by hurricane END"
       end
+
+      def install
+        inside Rails.root do
+          run "bundle install"
+        end
+      end
       
       def copy_layouts
         # TODO remove the haml hardcode, let them choose what template they want
