@@ -1,0 +1,34 @@
+= form_for @<%=singular_name%>,:html => {:class => "form-horizontal"} do |f|
+  = f.hidden_field :uid
+  - if @<%=singular_name%>.errors.any?
+    #error
+      %h2= "请修正以下#{pluralize(@<%=singular_name%>.errors.count,"error")}个错误后再重试:"
+      %ul
+      - @<%=singular_name%>.errors.full_messages.each do |msg|
+        %li = msg
+  
+  .control-group
+    = f.label :name,"用户名", :class => "control-label"
+    .controls
+      = f.text_field :name, :placeholder => "请输入"
+  .control-group
+    = f.label :emp_no,"工号", :class => "control-label"
+    .controls
+      = f.text_field :emp_no, :placeholder => "请输入"
+  .control-group
+    = f.label :email,"邮箱", :class => "control-label"
+    .controls
+      = f.text_field :email, :placeholder => "请输入"
+  .control-group
+    = f.label :mobile,"联系电话", :class => "control-label"
+    .controls
+      = f.text_field :mobile, :placeholder => "请输入"
+  .control-group
+    = f.label :yy,"YY", :class => "control-label"
+    .controls
+      = f.text_field :yy, :placeholder => "请输入"
+  .control-group
+    .controls
+      %button{:type => "submit", :class => "btn-primary"} 提交
+      &nbsp;&nbsp;
+      = link_to "返回", :<%=singular_name%>s

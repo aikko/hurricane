@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  <head charset="utf-8">
+    <title>欢迎使用珠海游戏联运管理后台</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= stylesheet_link_tag    "login", :media => "all" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <% if flash[:alert] -%>
+      <p class="alert"><%= flash[:alert] %></p>
+    <% end -%>
+    <div class="container">
+      <%= form_for :login, :html => {:class => "form-signin"} do |f| %>
+        <h2 class="form-signin-heading">珠海游戏联运后台</h2>
+        <%= f.text_field :name, :class => "input-block-level", :placeholder => "邮箱/员工号/通行证" %>
+        <button class="btn btn-large btn-primary" type="submit">登录</button>
+      <% end %>
+    </div>
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+%h3 角色列表
+= link_to '新建角色', new_role_path 
+&nbsp;
+= link_to '删除记录', roles_path+'/delete/all',:method => :delete,:data => {:confirm =>'您确定要删除这些记录吗？'},:id => "delete-all-link"
+%br
+%br
+= paginate @roles
+%form{:id => "tbl-form"}
+  %table.table.table-hover
+    %thead
+      %tr
+        %th 
+          %input{:type=>"checkbox",:id=>"check-all","data-targets" =>"roles"}
+        %th 角色名
+        %th 关键字
+        %th 角色描述
+        %th
+        %th
+    %tbody
+    - @roles.each do |role|
+      %tr
+        %td
+          %input{:type => "checkbox", :name => "roles[]", :value => role.id}
+        %td= role.name
+        %td= role.key
+        %td= role.desc
+        %td
+          = link_to edit_role_path(role) do 
+            %li.icon-edit{:title => "修改"}
+        %td
+          = link_to role, :method => :delete, :data => {:confirm => '您确定要删除此记录吗？'} do
+            %li.icon-trash{:title =>"删除"}
+
+= paginate @roles

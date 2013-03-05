@@ -1,0 +1,26 @@
+= form_for @role,:html => {:class => "form-horizontal"} do |f|
+  = f.hidden_field :id
+  - if @role.errors.any?
+    #error
+      %h2= "请修正以下#{pluralize(@role.errors.count,"error")}个错误后再重试:"
+      %ul
+      - @role.errors.full_messages.each do |msg|
+        %li = msg
+  
+  .control-group
+    = f.label :name,"角色名", :class => "control-label"
+    .controls
+      = f.text_field :name, :placeholder => "请输入"
+  .control-group
+    = f.label :key,"关键字", :class => "control-label"
+    .controls
+      = f.text_field :key, :placeholder => "请输入"
+  .control-group
+    = f.label :desc,"角色描述", :class => "control-label"
+    .controls
+      = f.text_area :desc, :placeholder => "请输入",:rows => "5",:class => "span6"
+  .control-group
+    .controls
+      %button{:type => "submit", :class => "btn-primary"} 提交
+      &nbsp;&nbsp;
+      = link_to "返回", :roles
