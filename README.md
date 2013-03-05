@@ -2,6 +2,7 @@ Hurricane
 =========
 # Quick Start
 begin with this command:
+
 rails new appname -m https://raw.github.com/jgnan1981/hurricane/master/project_template.rb  --skip-bundle
 
 # Introduction to Hurricane
