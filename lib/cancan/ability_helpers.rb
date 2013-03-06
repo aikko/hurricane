@@ -1,9 +1,9 @@
 module Hurricane
   module CanCan
-    module AbilityHelper
+    module AbilityHelpers
       def roles(user)
-        user ||= User.new # for guest
-        @roles = user.roles.map { |role| role.key.to_sym}
+        return unless user
+        @roles ||= user.roles.map { |role| role.key.to_sym}
       end
 
       def has_roles?(*keys)

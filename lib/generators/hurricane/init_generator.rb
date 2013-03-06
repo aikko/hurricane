@@ -4,7 +4,7 @@ module Hurricane
       source_root File.expand_path("../templates",__FILE__)
      
       def config_gem_file
-        append_to_file 'Gemfile', '# imported by hurricane BEGIN' 
+        append_to_file 'Gemfile', "\n\n# imported by hurricane BEGIN" 
         gem "bootstrap-sass",:version => "~> 2.2.2.0", :group => :asset
         # TODO let user choose which template they want in future
         gem "haml-rails"
