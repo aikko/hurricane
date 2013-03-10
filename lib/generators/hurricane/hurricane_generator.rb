@@ -11,9 +11,8 @@ module Hurricane
       hook_for :orm
       
       def generate_controllers
-        copy_file "controllers/home_controller.rb", "app/controllers/home_controller.rb"
-        copy_file "controllers/login_controller.rb","app/controllers/login_controller.rb"
-        copy_file "controllers/roles_controller.rb","app/controllers/roles_controller.rb"
+        source,target,suffix = "controllers/","app/controllers","_controller.rb"
+        ["home","login","roles","login_required"].each {|name| copy_file source+name+suffix, target+name+suffix}
         template "controllers/users_controller.rb","app/controllers/#{plural_name}_controller.rb"
       end
 
