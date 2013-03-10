@@ -46,6 +46,9 @@ resources :roles do
 ROUTES
       end
 
+      def remove_public_index
+        remove_file "public/index.html"
+      end
 
       def copy_ability
         template "cancan/ability.rb","app/model/ability.rb"
