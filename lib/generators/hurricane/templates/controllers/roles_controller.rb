@@ -1,5 +1,5 @@
 # coding = utf-8
-class RolesController < Hurricane::Controllers::LoginRequiredController
+class RolesController < LoginRequiredController
   load_and_authorize_resource
 
   # GET /roles

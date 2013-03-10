@@ -1,5 +1,5 @@
 gem 'hurricane', '=0.0.1'#,:git => 'git://github.com/jgnan1981/hurricane.git'
-run "bundle install"
+run "bundle install" unless options[:skip_bundle]
 
 generate 'hurricane:init'
 

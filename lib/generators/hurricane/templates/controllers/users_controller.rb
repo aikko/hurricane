@@ -1,5 +1,5 @@
 # coding : utf-8
-class <%= human_name %>sController < Hurricane::Controllers::LoginRequiredController
+class <%= human_name %>sController < LoginRequiredController
   load_and_authorize_resource
 
   # GET /<%=plural_name%>

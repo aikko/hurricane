@@ -11,7 +11,7 @@ module Hurricane
       hook_for :orm
       
       def generate_controllers
-        source,target,suffix = "controllers/","app/controllers","_controller.rb"
+        source,target,suffix = "controllers/","app/controllers/","_controller.rb"
         ["home","login","roles","login_required"].each {|name| copy_file source+name+suffix, target+name+suffix}
         template "controllers/users_controller.rb","app/controllers/#{plural_name}_controller.rb"
       end
@@ -26,7 +26,7 @@ module Hurricane
       end
 
       def routing
-        route <<ROUTES
+        route <<-ROUTES
 resources :roles do
     get 'page/:page', :action => :index, :on => :collection
     delete 'delete/all', :action => :destroy_all, :on => :collection
@@ -42,7 +42,7 @@ resources :roles do
   get 'login' => 'login#index'
   post 'login' => 'login#new'
   get 'logout' => 'login#logout'
-ROUTES
+        ROUTES
       end
 
       def remove_public_index
