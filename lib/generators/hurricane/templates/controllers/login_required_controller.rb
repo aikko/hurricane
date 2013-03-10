@@ -1,6 +1,6 @@
 # coding: utf-8
 
-class LoginRequiredController < ApplicationController
+class LoginRequiredController < HurricaneController
   before_filter :require_login
 
   rescue_from CanCan::AccessDenied do |exp|
@@ -19,11 +19,6 @@ class LoginRequiredController < ApplicationController
   end
 
   def redirect_to_login
-    if Rails.env.production? 
-      redirect_to '/login', :alert => '权限错误!' # TODO change this in your real production environment
-    else
-      redirect_to '/login', :alert => '权限错误！'
-    end
-
+    redirect_to config.login_uri, :alert => t 'hurricane.alert.illegal_privilege' # TODO change this in your real production environment
   end
 end

@@ -12,8 +12,11 @@ module Hurricane
       
       def generate_controllers
         source,target,suffix = "controllers/","app/controllers/","_controller.rb"
-        ["home","login","roles","login_required"].each {|name| copy_file source+name+suffix, target+name+suffix}
-        template "controllers/users_controller.rb","app/controllers/#{plural_name}_controller.rb"
+        ["home","roles","login_required"].each {|name| copy_file source + name + suffix, target + name + suffix}
+        ["login","hurricane","users"].each do |name|
+          target_name =  name == 'users' ? plural_name : name
+          template source + name + suffix, target + target_name + suffix
+        end
       end
 
       def copy_views
@@ -50,7 +53,7 @@ resources :roles do
       end
 
       def copy_ability
-        template "cancan/ability.rb","app/model/ability.rb"
+        template "cancan/ability.rb","app/models/ability.rb"
       end
     end
   end

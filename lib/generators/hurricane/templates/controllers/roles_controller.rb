@@ -48,7 +48,7 @@ class RolesController < LoginRequiredController
 
     respond_to do |format|
       if @role.save
-        format.html { redirect_to edit_role_path(@role), :notice => '记录创建成功.' }
+        format.html { redirect_to edit_role_path(@role), :notice => t 'hurricane.notice.create_record_success', :type => t_type }
         format.json { render json: @role, status: :created, location: @role }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class RolesController < LoginRequiredController
 
     respond_to do |format|
       if @role.update_attributes(params[:role])
-        format.html { redirect_to edit_role_path(@role), notice: '记录修改成功！' }
+        format.html { redirect_to edit_role_path(@role), :notice => t 'hurricane.notice.update_record_success', :type => t_type}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -80,7 +80,7 @@ class RolesController < LoginRequiredController
     @role.destroy
 
     respond_to do |format|
-      format.html { redirect_to roles_url }
+      format.html { redirect_to roles_url , :notice => t 'hurricane.notice.delete_record_success', :type => t_type}
       format.json { head :no_content }
     end
   end
@@ -89,10 +89,15 @@ class RolesController < LoginRequiredController
   def destroy_all
     p params
     unless params[:roles]
-      redirect_to roles_url, :alert => '请选择要删除的记录!!' 
+      redirect_to roles_url, :alert => t 'hurricane.alert.choose_delete_records', :type => t_type
     else
       Role.delete_all(:id => params[:roles])
-      redirect_to roles_url, :notice => "记录删除成功"
+      redirect_to roles_url, :notice => t 'hurricane.notice.delete_records_success', :type => t_type
     end
+  end
+
+  private
+  def record_type
+    :type_role
   end
 end

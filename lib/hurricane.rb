@@ -1,6 +1,5 @@
-require 'cancan/ability_helpers'
-require 'helper/ui_component_helper'
-#require 'controllers/login_required_controller'
+require 'hurricane/cancan/ability_helpers'
+require 'hurricane/helper/ui_component_helper'
 
 module Hurricane
   ActionView::Base.send :include, UiComponentHelper

@@ -1,12 +1,36 @@
 zh:
   hurricane:
-    common_ui:
-      delete_all:
-        choose_record_first: "请选择您要删除的记录！"
+    title: "欢迎使用Hurricane管理后台"
+    btn:
+      login: "登录"
+      logout: "登出"
+      save: "保存"
+      del: "删除"
+      create: "创建"
+      edit: "修改"
+      back: "返回"
+      cancel: "取消"
     views:
+      common_ui:
+        delete_all:
+            choose_record_first: "请先选择您要删除的记录!"
+      login:
+        username_placeholder: "请输入您的邮箱"
       pagination:
         first: "&laquo; 首页"
-        last: "尾页 &raquo;"
+        last: "末页 &raquo;"
         previous: "&lsaquo; 上页"
         next: "下页 &rsaquo;"
         truncate: "..."
+    type:
+      <%=singular_name%>: "用户"
+      role: "角色"
+    notice:
+      create_record_success: "%{type}创建成功!"
+      update_record_success: "%{type}更新成功!"
+      delete_record_success: "%{type}删除成功!"
+      delete_records_success: "%{type}删除成功!"
+    alert:
+      choose_delete_records: "请先选择你要删除的%{type}!"
+      illegal_privilege: "你没有所需的操作权限，请与系统管理员联系"
+      user_not_exists: "用户不存在或登录信息错误，请更正后再尝试!"

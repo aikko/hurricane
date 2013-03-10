@@ -1,4 +1,4 @@
-class LoginController < ApplicationController
+class LoginController < HurricaneController
   def index
     render :layout => false
   end
@@ -10,7 +10,7 @@ class LoginController < ApplicationController
       session[:current_user_id] = user.first.id
       redirect_to "/"
     else
-      flash[:alert] = "Username not exists"
+      flash[:alert] = t "hurricane.alert.user_not_exists"
       render "index", :layout => false
     end
   end

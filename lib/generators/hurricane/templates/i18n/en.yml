@@ -1,5 +1,15 @@
 en:
   hurricane:
+    title: "Welcome to use Hurricane!"
+    btn:
+      login: "Login"
+      logout: "Logout"
+      save: "Save"
+      delete: "Del."
+      create: "Create"
+      edit: "Edit"
+      back: "Back"
+      cancel: "Cancel"
     views:
       common_ui:
         delete_all:
@@ -10,3 +20,17 @@ en:
         previous: "&lsaquo; Prev."
         next: "Next &rsaquo;"
         truncate: "..."
+      login:
+        username_placeholder: "Please enter your email"
+    type:
+      <%=singular_name%>: "<%=human_name%>"
+      role: "Role"
+    notice:
+      create_record_success: "%{type} update successed!"
+      update_record_success: "%{type} update successed!"
+      delete_record_success: "%{type} delete successed!"
+      delete_records_success: "%{type} records delete successed!"
+    alert:
+      choose_delete_records: "Please choose %{type} records before delete!"
+      illegal_privilege: "You have not required privilege, please contact with your admin."
+      user_not_exists: "User not exists or login information error, please retry after correction!"

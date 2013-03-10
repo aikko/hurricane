@@ -5,11 +5,11 @@ module Hurricane
      
       def config_gem_file
         append_to_file 'Gemfile', "\n\n# imported by hurricane BEGIN" 
-        gem "bootstrap-sass",:version => "~> 2.2.2.0", :group => :asset
+        gem "bootstrap-sass",:version => "~> 2.2.2.0", :group => :assets
         # TODO let user choose which template they want in future
         gem "haml-rails"
         gem "kaminari"
-        gem "cancan"
+        gem "cancan", :version => "= 1.6.8"
         append_to_file "Gemfile", "\n# imported by hurricane END"
       end
 
@@ -35,6 +35,11 @@ module Hurricane
 
       def copy_templates
         directory 'rails/', 'lib/templates/'
+      end
+
+      def setup_configs
+        environment "config.i18n.default_locale = :zh"
+        [:development,:test,:production].each {|env| environment "config.login_uri = '/login' # TODO change this yourself", :env => env}
       end
     end
   end

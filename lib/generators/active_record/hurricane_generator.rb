@@ -16,7 +16,7 @@ module ActiveRecord
 
       def generate_model
         invoke "active_record:model",[name],:migration => false unless model_exists?(singular_name) && behavior == :invoke
-        generate "model", "Role name:string key:string desc:text"
+        invoke "active_record:model",["Role"],:migration => false
       end
 
 
@@ -30,40 +30,43 @@ module ActiveRecord
               content += ',' if i < attributes.size - 1
           end
         end
-        content +=  model_contents + <<CONTENT
+        content +=  model_contents + <<-CONTENT
 
   # this fields are essential to autherization
   attr_accessor :email, :mobile 
 
-CONTENT
+        CONTENT
         inject_into_class(model_path(singular_name),get_class_path.last, add_indent(content)) if model_exists?(singular_name) 
-        inject_into_class(model_path("role"),"Role", "  has_and_belongs_to_many :users, :join_table => '#{table_name}_roles'\n") if model_exists?("role") 
+        inject_into_class(model_path("role"),"Role", <<-ROLE) if model_exists?("role") 
+
+  attr_accessor :name,:key,:desc
+  has_and_belongs_to_many :users, :join_table => '#{table_name}_roles'
+        ROLE
       end
 
       def model_data
-<<RUBY
+        <<-RUBY
       # Database authenticatable
       t.string :email, :null => false, :default => ""
       t.string :mobile, :null => true, :default => ""
-RUBY
+        RUBY
       end
 
       def create_indexes
-<<SCRIPTS
-    # index
-    add_index :#{table_name}, :email
-    add_index :#{table_name}, :mobile
-    add_index :roles, :key
-
+        <<-SCRIPTS
     #create the join table
-    create_tale(:#{table_name}_roles) do |t|
+    create_table :#{table_name}_roles do |t|
       t.integer :#{singular_name}_id
       t.integer :role_id
     end
 
-    add_index :#{table_name}_roles, :#{singular_name}_id, :role_id
-SCRIPTS
+    #create indexes
+    add_index :#{table_name}, :email, :unique => true
+    add_index :#{table_name}, :mobile
+    add_index :#{table_name}_roles, [:#{singular_name}_id, :role_id], :unique => true
+        SCRIPTS
       end
+
 
       private
       def get_class_path

@@ -1,0 +1,16 @@
+!!! 5
+%html
+  %head{:charset => "utf-8"}
+    %meta{:name => "viewport", :content => "width=devise-width,initial-scale=1.0"}
+    = stylesheet_link_tag "application",:media => "all"
+    = stylesheet_link_tag "login",:media => "all"
+    = csrf_meta_tags
+  %body
+    - if flash[:alert]
+      %p.alert= flash[:alert]
+    .container
+      = form_for :login, :html=> {:class => "form-signin"} do |f|
+        %h2.form-signin-heading= t 'hurricane.title'
+        = f.text_field :name, :class=> 'input-block-level', :placeholder => t('hurricane.views.login.username_placeholder')
+        %button.btn.btn-large.btn-primary{:type => 'submit'}= t('hurricane.btn.login')
+    = javascript_include_tag 'application'

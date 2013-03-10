@@ -16,5 +16,5 @@ $ () ->
     if params
       $t.prop "href",href + '?' + params 
     else
-      alert '<%=I18n.t 'hurricane.views.common_ui.delete_all.choose_record_first'%>'
+      alert '请选择操作记录!'
       false

@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:charset =>"utf-8"}
-    %title 珠海游戏联运管理后台
+    %title= t('hurricane.title')
     = stylesheet_link_tag   "application", :media => "all" 
     = csrf_meta_tags
   %body
@@ -13,13 +13,13 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href =>"#"} 珠海游戏联运后台
+          %a.brand{:href =>"#"}= t 'hurricane.title'
           .nav-collapse.collapse
             %p.navbar-text.pull-right
               您好，
               = @_current_user.name
               (
-              = link_to "登出", "/logout"
+              = link_to t('hurricane.btn.logout'), "/logout"
               )
             %ul.nav
               %li.active

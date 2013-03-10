@@ -1,12 +1,12 @@
 gem 'hurricane', '=0.0.1'#,:git => 'git://github.com/jgnan1981/hurricane.git'
-run "bundle install" unless options[:skip_bundle]
-
-generate 'hurricane:init'
 
 puts <<TODOS
 Hurricane initialization completed.
 
-Please run: 
+To setup your project, first run this command:
+rails g hurricane:init
+
+It'll help you to import everything that hurricane need. After doing so , you should build up your own user model before your first run:
 rails g hurricane MODEL [attributes]
 
 to setup your user model and the admin functions
