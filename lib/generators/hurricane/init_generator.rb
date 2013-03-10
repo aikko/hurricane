@@ -18,6 +18,10 @@ module Hurricane
           run "bundle install"
         end
       end
+
+      def remove_public_index
+          remove_file "public/index.html"
+      end
       
       def copy_layouts
         # TODO remove the haml hardcode, let them choose what template they want
