@@ -17,7 +17,7 @@
           .nav-collapse.collapse
             %p.navbar-text.pull-right
               您好，
-              = @_current_user.name
+              = @_current_user.email
               (
               = link_to t('hurricane.btn.logout'), "/logout"
               )

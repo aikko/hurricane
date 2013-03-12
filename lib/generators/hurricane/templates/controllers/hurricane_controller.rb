@@ -1,4 +1,4 @@
-class HurricaneController < ActionController::Base
+class HurricaneController < ApplicationController
   protect_from_forgery
 
   protected
@@ -8,7 +8,7 @@ class HurricaneController < ActionController::Base
 
   def t_type
     if respond_to? "record_type"
-      t 'hurricane.type.' + record_type
+      t 'hurricane.type.' + record_type.to_s
     else
       ""
     end

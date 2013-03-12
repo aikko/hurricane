@@ -1,6 +1,4 @@
 %ul.nav.nav-list
-   %li.nav-header 用户管理
-   %li=link_to "用户管理", :<%=plural_name%>
-   %li=link_to "角色管理", :roles
-   %li.nav-header 活动管理
-   %li=link_to "抽奖活动"
+   %li.nav-header= t('hurricane.menu.user_admin')
+   %li=link_to t('hurricane.menu.user_admin'), :<%=plural_name%>
+   %li=link_to t('hurricane.menu.role_admin'), :roles

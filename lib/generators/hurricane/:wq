@@ -1,4 +1,4 @@
-%h3= t('hurricane.views.commons.list_title',:type => t('hurricane.type.<%=singular_name%>'))
+%h3 <%= t 'hurricane.views.commons.list_title',:type => t('hurricane.type.#{singular_name}')%>
 = link_to t('hurricane.btn.create'), new_<%=singular_name%>_path 
 &nbsp;
 = link_to t('hurricane.btn.delete'), <%=plural_name%>_path + '/delete/all',:method => :delete, :id => 'delete-all-link', :data => {:confirm => t('hurricane.notice.confirm_deletes')}
@@ -12,11 +12,11 @@
       %tr
         %th 
           %input{:type=>"checkbox",:id=>"check-all","data-targets" =>"<%=plural_name%>"}
-        %th= t('hurricane.views.users.email')
-        %th= t('hurricane.views.users.mobile')
-<% @attributes.each do |attr|-%>
+        %th= t 'hurricane.views.users.email
+        %th= t 'hurricane.views.users.mobil
+        <% attributes.each do |attr|-%>
         %th <%=attr.name%>
-<% end -%>
+        <% end -%>
         %th
         %th
     %tbody
@@ -26,9 +26,9 @@
           %input{:type => "checkbox", :name => "<%=plural_name%>[]", :value => <%=singular_name%>.id}
         %td= <%=singular_name%>.email
         %td= <%=singular_name%>.mobile
-<% attributes.each do |attr| -%>
+        <% attributes.each do |attr| -%>
         %td= <%=singular_name%>.<%=attr.name%>
-<% end -%>
+        <% end -%>
         %td
           = link_to edit_<%=singular_name%>_path(<%=singular_name%>) do 
             %li.icon-edit{:title => t('hurricane.btn.edit')}

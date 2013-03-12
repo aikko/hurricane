@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'rails/generators/active_record'
 require 'generators/hurricane/orm_helpers'
 
@@ -5,6 +6,7 @@ module ActiveRecord
   module Generators
     class HurricaneGenerator < ActiveRecord::Generators::Base
       argument :attributes, :type => :array, :default => [],  :banner => "field:type field:type"
+      attr_accessor :attributes
 
       include Hurricane::Generators::OrmHelpers
       source_root File.expand_path("../templates",__FILE__)
@@ -16,7 +18,7 @@ module ActiveRecord
 
       def generate_model
         invoke "active_record:model",[name],:migration => false unless model_exists?(singular_name) && behavior == :invoke
-        invoke "active_record:model",["Role"],:migration => false
+        template 'role_model.rb','app/models/role.rb'
       end
 
 
@@ -24,7 +26,7 @@ module ActiveRecord
         content = ''
         # accept user defined attributes
         if attributes.any?
-          content += '  attr_accessor'
+          content += '  attr_accessible'
           attributes.each_with_index do |attr,i| 
               content += " :#{attr.name}"
               content += ',' if i < attributes.size - 1
@@ -33,15 +35,10 @@ module ActiveRecord
         content +=  model_contents + <<-CONTENT
 
   # this fields are essential to autherization
-  attr_accessor :email, :mobile 
+  attr_accessible :email, :mobile 
 
         CONTENT
         inject_into_class(model_path(singular_name),get_class_path.last, add_indent(content)) if model_exists?(singular_name) 
-        inject_into_class(model_path("role"),"Role", <<-ROLE) if model_exists?("role") 
-
-  attr_accessor :name,:key,:desc
-  has_and_belongs_to_many :users, :join_table => '#{table_name}_roles'
-        ROLE
       end
 
       def model_data
@@ -67,6 +64,14 @@ module ActiveRecord
         SCRIPTS
       end
 
+      def generate_seeds
+        remove_file "db/seeds.rb"
+        template "seeds.rb","db/seeds.rb"
+      end
+
+      def model_attributes
+        attributes.inject("") {|sum,attr| sum << ",#{attr.name}:''"}
+      end
 
       private
       def get_class_path

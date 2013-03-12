@@ -5,15 +5,13 @@ zh:
       login: "登录"
       logout: "登出"
       save: "保存"
-      del: "删除"
+      delete: "删除"
       create: "创建"
       edit: "修改"
       back: "返回"
       cancel: "取消"
+      submit: "提交"
     views:
-      common_ui:
-        delete_all:
-            choose_record_first: "请先选择您要删除的记录!"
       login:
         username_placeholder: "请输入您的邮箱"
       pagination:
@@ -22,15 +20,36 @@ zh:
         previous: "&lsaquo; 上页"
         next: "下页 &rsaquo;"
         truncate: "..."
+      commons:
+        list_title: "%{type}列表"
+        edit_title: "%{type} %{id} 记录详情"
+        create_title: "创建%{type}"
+        input_placeholder: "请输入"
+      users:
+        email: "邮箱"
+        mobile: "联系电话"
+<% attributes.each do |attr| -%>
+        <%=attr.name%>: "<%=attr.name%>"
+<% end -%>
+      roles:
+        name: "角色名"
+        key: "角色关键字"
+        desc: "角色描述"
     type:
       <%=singular_name%>: "用户"
       role: "角色"
+    menu:
+      user_admin: "用户管理"
+      role_admin: "角色管理"
     notice:
-      create_record_success: "%{type}创建成功!"
-      update_record_success: "%{type}更新成功!"
-      delete_record_success: "%{type}删除成功!"
-      delete_records_success: "%{type}删除成功!"
+      create_record_success: "%{type}记录创建成功!"
+      update_record_success: "%{type}记录更新成功!"
+      delete_record_success: "%{type}记录删除成功!"
+      delete_records_success: "%{type}记录删除成功!"
+      confirm_deletes: "您确定要删除这些记录吗？"
+      confirm_delete: "您确定要删除这条记录吗？"
     alert:
       choose_delete_records: "请先选择你要删除的%{type}!"
       illegal_privilege: "你没有所需的操作权限，请与系统管理员联系"
       user_not_exists: "用户不存在或登录信息错误，请更正后再尝试!"
+      fix_and_try: "请先修正以下%{count}个错误再重新尝试"

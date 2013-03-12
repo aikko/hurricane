@@ -20,27 +20,30 @@ module Hurricane
       end
 
       def copy_layouts
+        # remove the default layout first
+        remove_file "app/views/layouts/application.html.erb"
         # TODO remove the haml hardcode, let them choose what template they want
-        directory "views/layout/haml", "app/views/layout"
+        directory "views/layouts/haml", "app/views/layouts"
+      end
+
+      def copy_global_views
+        directory "views/home", "app/views/home"
       end
 
       def copy_assets
+        remove_file "app/assets/stylesheets/application.css"
         directory "assets","app/assets"
       end
       
-      def copy_i18n_files
-        copy_file "i18n/en.yml", "config/locales/hurricane.en.yml"
-        copy_file "i18n/zh.yml", "config/locales/hurricane.zh.yml"
-      end
-
       def copy_templates
         directory 'rails/', 'lib/templates/'
       end
 
       def setup_configs
         environment "config.i18n.default_locale = :zh"
-        [:development,:test,:production].each {|env| environment "config.login_uri = '/login' # TODO change this yourself", :env => env}
+        [:development,:test,:production].each {|env| environment "config.login_url = '/login' # TODO change this yourself", :env => env}
       end
+
     end
   end
 end

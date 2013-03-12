@@ -1,2 +1,2 @@
-%h3= "用户 #{@<%=singular_name%>.name} 的详细信息"
+%h3= t('hurricane.views.commons.edit_title',:type => t('hurricane.type.<%=singular_name%>'),:id => @<%=singular_name%>.id)
 = render 'form'

@@ -1,6 +1,7 @@
 module Hurricane
   module Generators
     class HurricaneGenerator < Rails::Generators::NamedBase
+      argument :attributes, type: :array, default: [], banner: "field[:type][:index] field[:type][:index]"
       include Rails::Generators::ResourceHelpers
 
       namespace "hurricane"
@@ -23,18 +24,25 @@ module Hurricane
         directory "views/login", "app/views/login"
         directory "views/roles", "app/views/roles"
         Dir.glob(File.join(find_in_source_paths("views/users/"),"*.haml")).each do  |filename| 
-          template filename, "views/#{plural_name}/#{filename.split('/').last}"
+          template filename, "app/views/#{plural_name}/#{filename.split('/').last}"
         end
         template "views/shared/_menu.html.haml","app/views/shared/_menu.html.haml"
       end
 
+      def copy_i18n_files
+        template "i18n/en.yml","config/locales/hurricane.en.yml"
+        template "i18n/zh.yml","config/locales/hurricane.zh.yml"
+      end
+
       def routing
         route <<-ROUTES
-resources :roles do
+  
+  resources :roles do
     get 'page/:page', :action => :index, :on => :collection
     delete 'delete/all', :action => :destroy_all, :on => :collection
   end
-  resources :users do
+  
+  resources :#{plural_name} do
     resources :roles
     get 'page/:page', :action => :index, :on => :collection
     delete 'delete/all', :action => :destroy_all, :on => :collection

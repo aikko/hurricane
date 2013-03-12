@@ -19,6 +19,6 @@ class LoginRequiredController < HurricaneController
   end
 
   def redirect_to_login
-    redirect_to config.login_uri, :alert => t 'hurricane.alert.illegal_privilege' # TODO change this in your real production environment
+    redirect_to Rails.application.config.login_url, :alert => t('hurricane.alert.illegal_privilege') # TODO change this in your real production environment
   end
 end

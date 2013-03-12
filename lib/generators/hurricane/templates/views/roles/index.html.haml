@@ -1,7 +1,7 @@
-%h3 角色列表
-= link_to '新建角色', new_role_path 
+%h3= t('hurricane.views.commons.list_title',:type => t('role'))
+= link_to t('hurricane.btn.create'), new_role_path 
 &nbsp;
-= link_to '删除记录', roles_path+'/delete/all',:method => :delete,:data => {:confirm =>'您确定要删除这些记录吗？'},:id => "delete-all-link"
+= link_to t('huricane.btn.delete'), roles_path+'/delete/all',:method => :delete,:data => {:confirm => t('hurricane.notice.confirm_deletes')},:id => "delete-all-link"
 %br
 %br
 = paginate @roles
@@ -11,9 +11,9 @@
       %tr
         %th 
           %input{:type=>"checkbox",:id=>"check-all","data-targets" =>"roles"}
-        %th 角色名
-        %th 关键字
-        %th 角色描述
+        %th= t 'hurricane.views.roles.name'
+        %th= t 'hurricane.views.roles.key'
+        %th= t 'hurricane.views.roles.desc'
         %th
         %th
     %tbody
@@ -26,9 +26,9 @@
         %td= role.desc
         %td
           = link_to edit_role_path(role) do 
-            %li.icon-edit{:title => "修改"}
+            %li.icon-edit{:title => t('hurricane.btn.edit')}
         %td
-          = link_to role, :method => :delete, :data => {:confirm => '您确定要删除此记录吗？'} do
-            %li.icon-trash{:title =>"删除"}
+          = link_to role, :method => :delete, :data => {:confirm => t('hurricane.notice.confirm_delete')} do
+            %li.icon-trash{:title => t('hurricane.btn.delete')}
 
 = paginate @roles

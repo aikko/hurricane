@@ -2,25 +2,25 @@
   = f.hidden_field :id
   - if @role.errors.any?
     #error
-      %h2= "请修正以下#{pluralize(@role.errors.count,"error")}个错误后再重试:"
+      %h2= t('hurricane.alert.fix_and_try':count => pluralize(@role.errors.count,"error"))
       %ul
       - @role.errors.full_messages.each do |msg|
         %li = msg
   
   .control-group
-    = f.label :name,"角色名", :class => "control-label"
+    = f.label :name,t('hurricane.views.roles.name'), :class => "control-label"
     .controls
-      = f.text_field :name, :placeholder => "请输入"
+      = f.text_field :name, :placeholder => t('hurricane.views.commons.input_placeholder')
   .control-group
-    = f.label :key,"关键字", :class => "control-label"
+    = f.label :key,t('hurricane.views.roles.key'), :class => "control-label"
     .controls
-      = f.text_field :key, :placeholder => "请输入"
+      = f.text_field :key, :placeholder => t('hurricane.views.commons.input_placeholder') 
   .control-group
-    = f.label :desc,"角色描述", :class => "control-label"
+    = f.label :desc,t('hurricane.views.roles.desc'), :class => "control-label"
     .controls
-      = f.text_area :desc, :placeholder => "请输入",:rows => "5",:class => "span6"
+      = f.text_area :desc, :placeholder => t('hurricane.views.commons.input_placeholder'),:rows => "5",:class => "span6"
   .control-group
     .controls
-      %button{:type => "submit", :class => "btn-primary"} 提交
+      %button{:type => "submit", :class => "btn-primary"}= t('hurricane.btn.submit')
       &nbsp;&nbsp;
-      = link_to "返回", :roles
+      = link_to t('hurricane.btn.back'), :roles

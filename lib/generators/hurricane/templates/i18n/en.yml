@@ -10,10 +10,8 @@ en:
       edit: "Edit"
       back: "Back"
       cancel: "Cancel"
+      submit: "Submit"
     views:
-      common_ui:
-        delete_all:
-            choose_record_first: "Please choose your record to delete before your operation!"
       pagination:
         first: "&laquo; First"
         last: "Last &raquo;"
@@ -22,15 +20,36 @@ en:
         truncate: "..."
       login:
         username_placeholder: "Please enter your email"
+      users:
+        email:"Email"
+        mobile:"Mobile"
+<% attributes.each do |attr| -%>
+        <%=attr.name%>:"<%=attr.name%>"
+<% end -%>
+      roles:
+        name:"Role Name"
+        key:"Keyword"
+        desc:"Description"
+      commons:
+        list_title: "%{type} List" 
+        edit_title: "%{type} %{id} details"
+        create_title: "Create %{type}"
+        input_placeholder: "Please enter..."
     type:
       <%=singular_name%>: "<%=human_name%>"
       role: "Role"
+    menu:
+      user_admin: "User Admin"
+      role_admin: "Role Admin"
     notice:
-      create_record_success: "%{type} update successed!"
-      update_record_success: "%{type} update successed!"
-      delete_record_success: "%{type} delete successed!"
+      create_record_success: "%{type} record created!"
+      update_record_success: "%{type} record update successed!"
+      delete_record_success: "%{type} record delete successed!"
       delete_records_success: "%{type} records delete successed!"
+      confirm_deletes: "Are you sure to delete these records?"
+      confirm_delete: "Are you sure to delete this record?"
     alert:
       choose_delete_records: "Please choose %{type} records before delete!"
       illegal_privilege: "You have not required privilege, please contact with your admin."
       user_not_exists: "User not exists or login information error, please retry after correction!"
+      fix_and_try: "Please fix the following %{count} error(s) and try again."
